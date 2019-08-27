@@ -11,6 +11,16 @@ namespace LibAlgoCs.Queues.LinkedListQueue.Tests
     [TestClass()]
     public class LinkedListQueueTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

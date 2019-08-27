@@ -11,6 +11,16 @@ namespace LibAlgoCs.Heaps.ArrayBinaryHeap.Tests
     [TestClass()]
     public class ArrayBinaryHeapTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void ClearTest()
         {

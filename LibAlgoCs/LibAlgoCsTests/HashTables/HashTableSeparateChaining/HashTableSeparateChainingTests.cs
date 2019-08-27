@@ -11,6 +11,14 @@ namespace LibAlgoCs.HashTables.HashTableSeparateChaining.Tests
     [TestClass()]
     public class HashTableSeparateChainingTests
     {
+        [TestInitialize()]
+        public void Initialize() {
+        }
+
+        [TestCleanup()]
+        public void Cleanup() {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

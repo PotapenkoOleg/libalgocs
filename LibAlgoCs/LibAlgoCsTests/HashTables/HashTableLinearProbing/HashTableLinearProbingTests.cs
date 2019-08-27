@@ -11,6 +11,14 @@ namespace LibAlgoCs.HashTables.HashTableLinearProbing.Tests
     [TestClass()]
     public class HashTableLinearProbingTests
     {
+        [TestInitialize()]
+        public void Initialize() {
+        }
+
+        [TestCleanup()]
+        public void Cleanup() {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

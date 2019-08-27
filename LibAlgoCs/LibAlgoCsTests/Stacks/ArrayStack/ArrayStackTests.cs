@@ -11,6 +11,16 @@ namespace LibAlgoCs.Stacks.ArrayStack.Tests
     [TestClass()]
     public class ArrayStackTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

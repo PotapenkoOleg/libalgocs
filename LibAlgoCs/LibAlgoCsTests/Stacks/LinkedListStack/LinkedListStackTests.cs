@@ -11,6 +11,16 @@ namespace LibAlgoCs.Stacks.LinkedListStack.Tests
     [TestClass()]
     public class LinkedListStackTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

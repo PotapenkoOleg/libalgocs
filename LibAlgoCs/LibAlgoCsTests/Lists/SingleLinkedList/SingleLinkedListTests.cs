@@ -11,6 +11,16 @@ namespace LibAlgoCs.Lists.SingleLinkedList.Tests
     [TestClass()]
     public class SingleLinkedListTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

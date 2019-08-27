@@ -11,6 +11,16 @@ namespace LibAlgoCs.Tries.Trie.Tests
     [TestClass()]
     public class TrieTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void ClearTest()
         {

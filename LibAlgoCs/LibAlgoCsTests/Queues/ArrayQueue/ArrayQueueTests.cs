@@ -11,6 +11,16 @@ namespace LibAlgoCs.Queues.ArrayQueue.Tests
     [TestClass()]
     public class ArrayQueueTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

@@ -11,6 +11,16 @@ namespace LibAlgoCs.Lists.DoubleLinkedList.Tests
     [TestClass()]
     public class DoubleLinkedListTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void AddTest()
         {

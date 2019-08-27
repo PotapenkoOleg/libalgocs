@@ -11,6 +11,16 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
     [TestClass()]
     public class TernaryTrieTests
     {
+        [TestInitialize()]
+        public void Initialize()
+        {
+        }
+
+        [TestCleanup()]
+        public void Cleanup()
+        {
+        }
+
         [TestMethod()]
         public void ClearTest()
         {
