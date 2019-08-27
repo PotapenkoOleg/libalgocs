@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAlgoCs", "LibAlgoCs\LibAlgoCs.csproj", "{A9C29303-0F5A-43C3-9CD5-D49727C7B8E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibAlgoCsTests", "LibAlgoCsTests\LibAlgoCsTests.csproj", "{91A02C51-17C8-46A7-8869-C568D54D7742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{A9C29303-0F5A-43C3-9CD5-D49727C7B8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9C29303-0F5A-43C3-9CD5-D49727C7B8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9C29303-0F5A-43C3-9CD5-D49727C7B8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A02C51-17C8-46A7-8869-C568D54D7742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A02C51-17C8-46A7-8869-C568D54D7742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A02C51-17C8-46A7-8869-C568D54D7742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A02C51-17C8-46A7-8869-C568D54D7742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
