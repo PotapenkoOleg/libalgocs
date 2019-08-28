@@ -4,13 +4,18 @@ using System.Collections.Generic;
 
 namespace LibAlgoCs.Tries.TernaryTrie
 {
-    public class TernaryTrie<TValue> : ISymbolTable<TValue>
+    public sealed class TernaryTrie<TValue> : ISymbolTable<TValue>
     {
-        private Node<TValue> Root { get; set; }
+        #region Private Fields
+
+        private TernaryTrieNode<TValue> Root { get; set; }
         private int Size { get; set; }
+        
+        #endregion
 
         #region Node Class
-        private sealed class Node<T>
+
+        private sealed class TernaryTrieNode<T>
         {
             private T value = default(T);
             public T Value
@@ -19,7 +24,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
                 {
                     if (!IsNodeValueSet)
                     {
-                        throw new NullReferenceException();
+                        throw new NullReferenceException("Node value is not set.");
                     }
                     else
                     {
@@ -39,16 +44,20 @@ namespace LibAlgoCs.Tries.TernaryTrie
                 value = default(T);
             }
             public char Character { get; }
-            public Node<T> Left { get; set; }
-            public Node<T> Middle { get; set; }
-            public Node<T> Right { get; set; }
+            public TernaryTrieNode<T> Left { get; set; }
+            public TernaryTrieNode<T> Middle { get; set; }
+            public TernaryTrieNode<T> Right { get; set; }
 
-            public Node(char character)
+            public TernaryTrieNode(char character)
             {
                 Character = character;
             }
         }
+        
         #endregion
+
+        #region Public Methods
+
         public void Put(string key, TValue value)
         {
             // TODO: balance trie with rotations
@@ -60,7 +69,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
             var node = Get(Root, key, 0);
             if (node == null)
             {
-                throw new KeyNotFoundException($"{key}");
+                throw new KeyNotFoundException($"Key not found:{key}");
             }
             return node.Value;
         }
@@ -116,14 +125,16 @@ namespace LibAlgoCs.Tries.TernaryTrie
             throw new NotImplementedException();
         }
 
+        #endregion
+
         #region Private Methods
 
-        private Node<TValue> Put(Node<TValue> node, string key, TValue value, int levelCounter)
+        private TernaryTrieNode<TValue> Put(TernaryTrieNode<TValue> node, string key, TValue value, int levelCounter)
         {
             var character = key[levelCounter];
             if (node == null)
             {
-                node = new Node<TValue>(character);
+                node = new TernaryTrieNode<TValue>(character);
             }
             if (character < node.Character)
             {
@@ -148,7 +159,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
             return node;
         }
 
-        private Node<TValue> Get(Node<TValue> node, string key, int levelCounter)
+        private TernaryTrieNode<TValue> Get(TernaryTrieNode<TValue> node, string key, int levelCounter)
         {
             if (node == null)
             {
@@ -170,7 +181,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
             else return node;
         }
 
-        private Node<TValue> Delete(Node<TValue> node, string key, int levelCounter)
+        private TernaryTrieNode<TValue> Delete(TernaryTrieNode<TValue> node, string key, int levelCounter)
         {
             if (node == null)
             {
@@ -212,17 +223,17 @@ namespace LibAlgoCs.Tries.TernaryTrie
             }
         }
 
-        private static bool IsNodeEmpty(Node<TValue> node)
+        private static bool IsNodeEmpty(TernaryTrieNode<TValue> node)
         {
             return !node.IsNodeValueSet && IsNodeHaveNoChildren(node);
         }
 
-        private static bool IsNodeHaveNoChildren(Node<TValue> node)
+        private static bool IsNodeHaveNoChildren(TernaryTrieNode<TValue> node)
         {
             return node.Left == null && node.Middle == null && node.Right == null;
         }
 
-        private static void SetChildToNull(Node<TValue> parent, Node<TValue> child)
+        private static void SetChildToNull(TernaryTrieNode<TValue> parent, TernaryTrieNode<TValue> child)
         {
             if (parent == null)
             {

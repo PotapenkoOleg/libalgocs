@@ -109,7 +109,7 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
             Assert.AreEqual(expected, actual);
 
             // invalid entry            
-            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("invalid"));            
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("invalid"));
         }
 
         [TestMethod()]
@@ -153,8 +153,8 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
             Assert.AreEqual(expected, actual);
 
             // invalid entry
-            _symbolTable.Delete("by");            
-            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));            
+            _symbolTable.Delete("by");
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));
 
             // delete root
             _symbolTable.Clear();
