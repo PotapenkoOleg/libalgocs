@@ -5,7 +5,6 @@ using System.Collections.Generic;
 namespace LibAlgoCs.Tries.TernaryTrie
 {
     public class TernaryTrie<TValue> : ISymbolTable<TValue>
-        where TValue : class
     {
         private Node<TValue> Root { get; set; }
         private int Size { get; set; }
@@ -13,8 +12,33 @@ namespace LibAlgoCs.Tries.TernaryTrie
         #region Node Class
         private sealed class Node<T>
         {
+            private T value = default(T);
+            public T Value
+            {
+                get
+                {
+                    if (!IsNodeValueSet)
+                    {
+                        throw new NullReferenceException();
+                    }
+                    else
+                    {
+                        return value;
+                    }
+                }
+                set
+                {
+                    this.value = value;
+                    IsNodeValueSet = true;
+                }
+            }
+            public bool IsNodeValueSet { get; private set; }
+            public void ClearNodeValue()
+            {
+                IsNodeValueSet = false;
+                value = default(T);
+            }
             public char Character { get; }
-            public T Value { get; set; }
             public Node<T> Left { get; set; }
             public Node<T> Middle { get; set; }
             public Node<T> Right { get; set; }
@@ -34,7 +58,11 @@ namespace LibAlgoCs.Tries.TernaryTrie
         public TValue Get(string key)
         {
             var node = Get(Root, key, 0);
-            return node?.Value;
+            if (node == null)
+            {
+                throw new KeyNotFoundException($"{key}");
+            }
+            return node.Value;
         }
 
         public void Delete(string key)
@@ -111,7 +139,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
             }
             else
             {
-                if (node.Value == null)
+                if (!node.IsNodeValueSet)
                 {
                     Size++;
                 }
@@ -178,7 +206,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
             }
             else
             {
-                node.Value = null;
+                node.ClearNodeValue();
                 Size--;
                 return node;
             }
@@ -186,7 +214,7 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         private static bool IsNodeEmpty(Node<TValue> node)
         {
-            return node.Value == null && IsNodeHaveNoChildren(node);
+            return !node.IsNodeValueSet && IsNodeHaveNoChildren(node);
         }
 
         private static bool IsNodeHaveNoChildren(Node<TValue> node)

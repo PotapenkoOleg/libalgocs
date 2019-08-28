@@ -35,12 +35,14 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void GetAllKeysTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
+        [Ignore]
         public void GetKeysWithPrefixTest()
         {
             Assert.Fail();
@@ -59,6 +61,7 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void LongestPrefixOfTest()
         {
             Assert.Fail();
@@ -71,6 +74,7 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void WildcardMatchTest()
         {
             Assert.Fail();

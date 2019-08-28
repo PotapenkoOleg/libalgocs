@@ -1,12 +1,13 @@
 ﻿using LibAlgoCs.Common.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace LibAlgoCs.Tries.TernaryTrie.Tests
 {
     [TestClass()]
     public class TernaryTrieTests
     {
-        private ISymbolTable<object> _symbolTable;
+        private ISymbolTable<int> _symbolTable;
 
         private void InitSymbolTable()
         {
@@ -24,7 +25,7 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            _symbolTable = new TernaryTrie<object>();
+            _symbolTable = new TernaryTrie<int>();
             InitSymbolTable();
         }
 
@@ -35,82 +36,84 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void PutTest()
         {
             var expected = 8;
             var actual = _symbolTable.Get("a");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 4;
             actual = _symbolTable.Get("by");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 6;
             actual = _symbolTable.Get("sea");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 1;
             actual = _symbolTable.Get("sells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 0;
             actual = _symbolTable.Get("she");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 3;
             actual = _symbolTable.Get("shells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 7;
             actual = _symbolTable.Get("shore");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 5;
             actual = _symbolTable.Get("the");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void GetTest()
         {
             var expected = 8;
             var actual = _symbolTable.Get("a");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 4;
             actual = _symbolTable.Get("by");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 6;
             actual = _symbolTable.Get("sea");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 1;
             actual = _symbolTable.Get("sells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 0;
             actual = _symbolTable.Get("she");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 3;
             actual = _symbolTable.Get("shells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 7;
             actual = _symbolTable.Get("shore");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 5;
             actual = _symbolTable.Get("the");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
-            // invalid entry
-            actual = _symbolTable.Get("invalid");
-            Assert.IsNull(actual);
+            // invalid entry            
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("invalid"));            
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void DeleteTest()
         {
             // clear all entries
@@ -126,48 +129,45 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
 
             var expected = 0;
             object actual = _symbolTable.GetSize();
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             InitSymbolTable();
 
             _symbolTable.Delete("by");
-            actual = _symbolTable.Get("by");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));
 
             _symbolTable.Delete("shore");
-            actual = _symbolTable.Get("shore");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("shore"));
 
             expected = 3;
             actual = _symbolTable.Get("shells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             expected = 6;
             actual = _symbolTable.Get("sea");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             _symbolTable.Delete("sea");
             expected = 1;
             actual = _symbolTable.Get("sells");
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             // invalid entry
-            _symbolTable.Delete("by");
-            actual = _symbolTable.Get("by");
-            Assert.IsNull(actual);
+            _symbolTable.Delete("by");            
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));            
 
             // delete root
             _symbolTable.Clear();
             _symbolTable.Put("a", 0);
             _symbolTable.Delete("a");
-            actual = _symbolTable.Get("a");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("a"));
             expected = 0;
             actual = _symbolTable.GetSize();
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void ClearTest()
         {
             var actual = _symbolTable.IsEmpty();
@@ -179,6 +179,7 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void IsEmptyTest()
         {
             var actual = _symbolTable.IsEmpty();
@@ -194,42 +195,51 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void GetSizeTest()
         {
             var expected = 8;
             var actual = _symbolTable.GetSize();
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             _symbolTable.Delete("by");
             expected = 7;
             actual = _symbolTable.GetSize();
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
 
             _symbolTable.Clear();
             expected = 0;
             actual = _symbolTable.GetSize();
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
+        [Ignore]
         public void GetAllKeysTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
+        [Ignore]
         public void GetKeysWithPrefixTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
+        [Ignore]
         public void WildcardMatchTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
+        [Ignore]
         public void LongestPrefixOfTest()
         {
             Assert.Fail();
