@@ -14,6 +14,6 @@ namespace LibAlgoCs.Common.Interfaces
 
         bool IsEmpty();
 
-        int getSize();
+        int GetSize();
     }
 }

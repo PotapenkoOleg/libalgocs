@@ -2,7 +2,7 @@
 {
     public enum AlgorithmType
     {
-        ITERATIVE,
-        RECURSIVE
+        Iterative,
+        Recursive
     }
 }

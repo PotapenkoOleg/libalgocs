@@ -2,7 +2,7 @@
 {
     public enum BinaryHeapType
     {
-        MIN,
-        MAX
+        Min,
+        Max
     }
 }

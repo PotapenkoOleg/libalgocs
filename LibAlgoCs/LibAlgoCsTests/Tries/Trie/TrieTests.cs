@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LibAlgoCs.Tries.Trie;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibAlgoCs.Tries.Trie.Tests
 {
@@ -22,13 +16,8 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [TestCategory("UnitTest")]
         public void ClearTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void ContainsTest()
         {
             Assert.Fail();
         }
@@ -46,12 +35,14 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void GetAllKeysTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
+        [Ignore]
         public void GetKeysWithPrefixTest()
         {
             Assert.Fail();
@@ -70,6 +61,7 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void LongestPrefixOfTest()
         {
             Assert.Fail();
@@ -82,6 +74,7 @@ namespace LibAlgoCs.Tries.Trie.Tests
         }
 
         [TestMethod()]
+        [Ignore]
         public void WildcardMatchTest()
         {
             Assert.Fail();
