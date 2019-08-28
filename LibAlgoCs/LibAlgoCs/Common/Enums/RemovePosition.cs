@@ -2,7 +2,7 @@
 {
     public enum RemovePosition
     {
-        BEGINNING,
-        END
+        Beginning,
+        End
     }
 }

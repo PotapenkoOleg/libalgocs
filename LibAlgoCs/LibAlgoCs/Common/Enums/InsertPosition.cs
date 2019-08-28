@@ -2,7 +2,7 @@
 {
     public enum InsertPosition
     {
-        BEGINNING,
-        END
+        Beginning,
+        End
     }
 }

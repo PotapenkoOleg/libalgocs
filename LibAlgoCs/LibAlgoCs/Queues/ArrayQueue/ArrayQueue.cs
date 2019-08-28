@@ -32,11 +32,6 @@ namespace LibAlgoCs.Queues.ArrayQueue
             throw new NotImplementedException();
         }
 
-        public int getSize()
-        {
-            throw new NotImplementedException();
-        }
-
         public int GetSize()
         {
             throw new NotImplementedException();

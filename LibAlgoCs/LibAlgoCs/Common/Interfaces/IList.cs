@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace LibAlgoCs.Common.Interfaces
 {
-
     public interface IList<TKey, TValue> : IEnumerable<TValue>
     {
         void Add(TKey key, TValue value, InsertPosition position);
