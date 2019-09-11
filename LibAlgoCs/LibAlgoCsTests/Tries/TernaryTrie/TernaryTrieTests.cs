@@ -108,7 +108,7 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
             actual = _symbolTable.Get("the");
             Assert.AreEqual(expected, actual);
 
-            // invalid entry            
+            // Invalid Entry            
             Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("invalid"));
         }
 
@@ -321,6 +321,13 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
             expected = "a";
             actual = _symbolTable.LongestPrefixOf("a");
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        [TestCategory("IntegrationTest")]
+        public void LoadTest()
+        {
+            Assert.Fail();
         }
 
         private int CheckKeys(IEnumerable<string> allKeys, Dictionary<string, int> dictionary)
