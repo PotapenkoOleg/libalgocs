@@ -10,13 +10,15 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         private TernaryTrieNode<TValue> Root { get; set; }
         private int Size { get; set; }
-        
+
         #endregion
 
         #region Node Class
 
         private sealed class TernaryTrieNode<T>
         {
+            #region Properties
+
             private T value = default(T);
             public T Value
             {
@@ -47,13 +49,15 @@ namespace LibAlgoCs.Tries.TernaryTrie
             public TernaryTrieNode<T> Left { get; set; }
             public TernaryTrieNode<T> Middle { get; set; }
             public TernaryTrieNode<T> Right { get; set; }
+            
+            #endregion
 
             public TernaryTrieNode(char character)
             {
                 Character = character;
             }
         }
-        
+
         #endregion
 
         #region Public Methods
@@ -107,22 +111,32 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         public IEnumerable<string> GetAllKeys()
         {
-            throw new NotImplementedException();
+            var queue = new List<string>(); // Using List<T> since it implements queue
+            Collect(Root, "", queue);
+            return queue;
         }
 
         public IEnumerable<string> GetKeysWithPrefix(string prefix)
         {
-            throw new NotImplementedException();
-        }
-
-        public string[] WildcardMatch(string key)
-        {
-            throw new NotImplementedException();
+            var subTree = Get(Root, prefix, 0);
+            if (subTree == null)
+            {
+                return null;
+            }
+            var queue = new List<string>(); // Using List<T> since it implements queue
+            Collect(subTree.Middle, prefix, queue);
+            return queue;
         }
 
         public string LongestPrefixOf(string prefix)
         {
-            throw new NotImplementedException();
+            int prefixLength = Search(Root, prefix, 0, int.MinValue);
+            if (prefixLength == int.MinValue)
+            {
+                // prefix not found
+                return null;
+            }
+            return prefix.Substring(0, prefixLength + 1);
         }
 
         #endregion
@@ -250,6 +264,47 @@ namespace LibAlgoCs.Tries.TernaryTrie
             if (parent.Right == child)
             {
                 parent.Right = null;
+            }
+        }
+
+        private void Collect(TernaryTrieNode<TValue> node, string prefix, IList<string> queue)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            Collect(node.Left, prefix, queue);
+            char character = node.Character;
+            if (node.IsNodeValueSet)
+            {
+                queue.Add(prefix + character);
+            }
+            Collect(node.Middle, prefix + character, queue);
+            Collect(node.Right, prefix, queue);
+        }
+
+        private int Search(TernaryTrieNode<TValue> node, string query, int levelCounter, int prefixLength)
+        {
+            if (node == null)
+            {
+                return prefixLength;
+            }
+            char character = query[levelCounter];
+            if (character < node.Character)
+            {
+                return Search(node.Left, query, levelCounter, prefixLength);
+            }
+            else if (character > node.Character)
+            {
+                return Search(node.Right, query, levelCounter, prefixLength);
+            }
+            else
+            {
+                if (node.IsNodeValueSet)
+                {
+                    prefixLength = levelCounter;
+                }
+                return Search(node.Middle, query, levelCounter + 1, prefixLength);
             }
         }
 

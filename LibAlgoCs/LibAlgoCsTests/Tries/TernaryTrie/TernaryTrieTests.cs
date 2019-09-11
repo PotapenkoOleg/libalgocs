@@ -215,34 +215,123 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
 
         [TestMethod()]
         [TestCategory("UnitTest")]
-        [Ignore]
         public void GetAllKeysTest()
         {
-            Assert.Fail();
+            var dictionary = new Dictionary<string, int>
+            {
+                { "she", 0 },
+                { "sells", 0 },
+                { "shells", 0 },
+                { "by", 0 },
+                { "the", 0 },
+                { "sea", 0 },
+                { "shore", 0 },
+                { "a", 0 }
+            };
+
+            var allKeys = _symbolTable.GetAllKeys();
+
+            int expected = 8;
+            int actual = CheckKeys(allKeys, dictionary);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
         [TestCategory("UnitTest")]
-        [Ignore]
         public void GetKeysWithPrefixTest()
         {
-            Assert.Fail();
+            var dictionary = new Dictionary<string, int>
+            {
+                {"she", 0 },
+                { "sells", 0},
+                { "shells", 0},
+                { "sea", 0},
+                { "shore", 0}
+            };
+
+            var prefix = "s";
+
+            var allKeys = _symbolTable.GetKeysWithPrefix(prefix);
+
+            var expected = 5;
+            var actual = CheckKeys(allKeys, dictionary);
+            Assert.AreEqual(expected, actual);
+
+            dictionary.Clear();
+
+            dictionary.Add("she", 0);
+            dictionary.Add("shells", 0);
+            dictionary.Add("shore", 0);
+
+            prefix = "sh";
+
+            allKeys = _symbolTable.GetKeysWithPrefix(prefix);
+
+            expected = 3;
+            actual = CheckKeys(allKeys, dictionary);
+            Assert.AreEqual(expected, actual);
+
+            prefix = "Invalid";
+
+            allKeys = _symbolTable.GetKeysWithPrefix(prefix);
+            Assert.IsNull(allKeys);
         }
 
         [TestMethod()]
         [TestCategory("UnitTest")]
-        [Ignore]
-        public void WildcardMatchTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        [TestCategory("UnitTest")]
-        [Ignore]
         public void LongestPrefixOfTest()
         {
-            Assert.Fail();
+            var expected = "shells";
+            var actual = _symbolTable.LongestPrefixOf("shellsort");
+            Assert.AreEqual(expected, actual);
+
+            expected = "a";
+            actual = _symbolTable.LongestPrefixOf("a");
+            Assert.AreEqual(expected, actual);
+
+            actual = _symbolTable.LongestPrefixOf("Invalid");
+            Assert.IsNull(actual);
+
+            _symbolTable.Clear();
+
+            _symbolTable.Put("128", 0);
+            _symbolTable.Put("128.112.055", 0);
+            _symbolTable.Put("128.112.055.015", 0);
+            _symbolTable.Put("128.112.136", 0);
+            _symbolTable.Put("128.112.155.011", 0);
+            _symbolTable.Put("128.112.155.013", 0);
+            _symbolTable.Put("128.112", 0);
+            _symbolTable.Put("128.222", 0);
+            _symbolTable.Put("128.222.136", 0);
+
+            expected = "128.112.136";
+            actual = _symbolTable.LongestPrefixOf("128.112.136.011");
+            Assert.AreEqual(expected, actual);
+
+            expected = "128.112";
+            actual = _symbolTable.LongestPrefixOf("128.112.100.016");
+            Assert.AreEqual(expected, actual);
+
+            expected = "128";
+            actual = _symbolTable.LongestPrefixOf("128.166.123.045");
+            Assert.AreEqual(expected, actual);
+
+            _symbolTable.Clear();
+            _symbolTable.Put("a", 0);
+            expected = "a";
+            actual = _symbolTable.LongestPrefixOf("a");
+            Assert.AreEqual(expected, actual);
+        }
+
+        private int CheckKeys(IEnumerable<string> allKeys, Dictionary<string, int> dictionary)
+        {
+            var numberOfItems = 0;
+            foreach (var key in allKeys)
+            {
+                numberOfItems++;
+                var value = dictionary[key];
+            }
+            return numberOfItems;
         }
     }
 }

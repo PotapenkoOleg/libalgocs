@@ -20,9 +20,7 @@ namespace LibAlgoCs.Common.Interfaces
 
         IEnumerable<string> GetAllKeys();
 
-        IEnumerable<string> GetKeysWithPrefix(string prefix);
-
-        string[] WildcardMatch(string key);
+        IEnumerable<string> GetKeysWithPrefix(string prefix);        
 
         string LongestPrefixOf(string prefix);
     }
