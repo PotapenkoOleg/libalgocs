@@ -10,15 +10,17 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         private TernaryTrieNode<TValue> Root { get; set; }
         private int Size { get; set; }
-        
+
         #endregion
 
         #region Node Class
 
-        private sealed class TernaryTrieNode<T>
+        private sealed class TernaryTrieNode<TItem>
         {
-            private T value = default(T);
-            public T Value
+            #region Properties
+
+            private TItem value = default(TItem);
+            public TItem Value
             {
                 get
                 {
@@ -41,28 +43,27 @@ namespace LibAlgoCs.Tries.TernaryTrie
             public void ClearNodeValue()
             {
                 IsNodeValueSet = false;
-                value = default(T);
+                value = default(TItem);
             }
             public char Character { get; }
-            public TernaryTrieNode<T> Left { get; set; }
-            public TernaryTrieNode<T> Middle { get; set; }
-            public TernaryTrieNode<T> Right { get; set; }
+            public TernaryTrieNode<TItem> Left { get; set; }
+            public TernaryTrieNode<TItem> Middle { get; set; }
+            public TernaryTrieNode<TItem> Right { get; set; }
+
+            #endregion
 
             public TernaryTrieNode(char character)
             {
                 Character = character;
             }
         }
-        
+
         #endregion
 
         #region Public Methods
 
-        public void Put(string key, TValue value)
-        {
-            // TODO: balance trie with rotations
-            Root = Put(Root, key, value, 0);
-        }
+        // TODO: balance trie with rotations
+        public void Put(string key, TValue value) => Root = Put(Root, key, value, 0);
 
         public TValue Get(string key)
         {
@@ -86,7 +87,15 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         public bool Contains(string key)
         {
-            return Get(key) != null;
+            try
+            {
+                Get(key);
+                return true;
+            }
+            catch (KeyNotFoundException)
+            {
+                return false;
+            }
         }
 
         public void Clear()
@@ -95,34 +104,38 @@ namespace LibAlgoCs.Tries.TernaryTrie
             Size = 0;
         }
 
-        public bool IsEmpty()
-        {
-            return Root == null;
-        }
+        public bool IsEmpty() => Root == null;
 
-        public int GetSize()
-        {
-            return Size;
-        }
+        public int GetSize() => Size;
 
         public IEnumerable<string> GetAllKeys()
         {
-            throw new NotImplementedException();
+            var queue = new List<string>(); // Using List<T> since it implements queue
+            Collect(Root, "", queue);
+            return queue;
         }
 
         public IEnumerable<string> GetKeysWithPrefix(string prefix)
         {
-            throw new NotImplementedException();
-        }
-
-        public string[] WildcardMatch(string key)
-        {
-            throw new NotImplementedException();
+            var subTree = Get(Root, prefix, 0);
+            if (subTree == null)
+            {
+                return null;
+            }
+            var queue = new List<string>(); // Using List<T> since it implements queue
+            Collect(subTree.Middle, prefix, queue);
+            return queue;
         }
 
         public string LongestPrefixOf(string prefix)
         {
-            throw new NotImplementedException();
+            int prefixLength = Search(Root, prefix, 0, int.MinValue);
+            if (prefixLength == int.MinValue)
+            {
+                // prefix not found
+                return null;
+            }
+            return prefix.Substring(0, prefixLength + 1);
         }
 
         #endregion
@@ -250,6 +263,47 @@ namespace LibAlgoCs.Tries.TernaryTrie
             if (parent.Right == child)
             {
                 parent.Right = null;
+            }
+        }
+
+        private void Collect(TernaryTrieNode<TValue> node, string prefix, IList<string> queue)
+        {
+            if (node == null)
+            {
+                return;
+            }
+            Collect(node.Left, prefix, queue);
+            char character = node.Character;
+            if (node.IsNodeValueSet)
+            {
+                queue.Add(prefix + character);
+            }
+            Collect(node.Middle, prefix + character, queue);
+            Collect(node.Right, prefix, queue);
+        }
+
+        private int Search(TernaryTrieNode<TValue> node, string query, int levelCounter, int prefixLength)
+        {
+            if (node == null)
+            {
+                return prefixLength;
+            }
+            char character = query[levelCounter];
+            if (character < node.Character)
+            {
+                return Search(node.Left, query, levelCounter, prefixLength);
+            }
+            else if (character > node.Character)
+            {
+                return Search(node.Right, query, levelCounter, prefixLength);
+            }
+            else
+            {
+                if (node.IsNodeValueSet)
+                {
+                    prefixLength = levelCounter;
+                }
+                return Search(node.Middle, query, levelCounter + 1, prefixLength);
             }
         }
 

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Tries\TernaryTrie\USZipCodes.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibAlgoCs\LibAlgoCs.csproj">
