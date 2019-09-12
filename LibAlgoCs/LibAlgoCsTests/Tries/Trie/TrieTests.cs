@@ -1,6 +1,7 @@
 ﻿using LibAlgoCs.Common.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LibAlgoCs.Tries.Trie.Tests
 {
@@ -117,19 +118,16 @@ namespace LibAlgoCs.Tries.Trie.Tests
         public void DeleteTest()
         {
             _symbolTable.Delete("a");
-            var actual = _symbolTable.Get("a");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("a"));
 
             _symbolTable.Delete("by");
-            actual = _symbolTable.Get("by");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));
 
             _symbolTable.Delete("shore");
-            actual = _symbolTable.Get("shore");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("shore"));
 
             var expected = 3;
-            actual = _symbolTable.Get("shells");
+            var actual = _symbolTable.Get("shells");
             Assert.AreEqual(expected, actual);
 
             expected = 6;
@@ -143,8 +141,7 @@ namespace LibAlgoCs.Tries.Trie.Tests
 
             // Invalid Entry
             _symbolTable.Delete("by");
-            actual = _symbolTable.Get("by");
-            Assert.IsNull(actual);
+            Assert.ThrowsException<KeyNotFoundException>(() => _symbolTable.Get("by"));
         }
 
         [TestMethod()]
@@ -223,11 +220,11 @@ namespace LibAlgoCs.Tries.Trie.Tests
         {
             var dictionary = new Dictionary<string, int>
             {
-                {"she", 0 },
-                { "sells", 0},
-                { "shells", 0},
-                { "sea", 0},
-                { "shore", 0}
+                { "she", 0 },
+                { "sells", 0 },
+                { "shells", 0 },
+                { "sea", 0 },
+                { "shore", 0 }
             };
 
             var prefix = "s";
@@ -254,8 +251,10 @@ namespace LibAlgoCs.Tries.Trie.Tests
 
             prefix = "Invalid";
 
+            expected = 0;
             allKeys = _symbolTable.GetKeysWithPrefix(prefix);
-            Assert.IsNull(allKeys);
+            actual = allKeys.Count();
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
@@ -270,8 +269,9 @@ namespace LibAlgoCs.Tries.Trie.Tests
             actual = _symbolTable.LongestPrefixOf("a");
             Assert.AreEqual(expected, actual);
 
+            expected = "";
             actual = _symbolTable.LongestPrefixOf("Invalid");
-            Assert.IsNull(actual);
+            Assert.AreEqual(expected, actual);
 
             _symbolTable.Clear();
 

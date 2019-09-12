@@ -219,14 +219,14 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         {
             var dictionary = new Dictionary<string, int>
             {
-                { "she", 0 },
-                { "sells", 0 },
-                { "shells", 0 },
-                { "by", 0 },
-                { "the", 0 },
-                { "sea", 0 },
-                { "shore", 0 },
-                { "a", 0 }
+                { "she", 0},
+                { "sells", 0},
+                { "shells", 0},
+                { "by", 0},
+                { "the", 0},
+                { "sea", 0},
+                { "shore", 0},
+                { "a", 0}
             };
 
             var allKeys = _symbolTable.GetAllKeys();
@@ -242,11 +242,11 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
         {
             var dictionary = new Dictionary<string, int>
             {
-                {"she", 0 },
-                { "sells", 0},
-                { "shells", 0},
-                { "sea", 0},
-                { "shore", 0}
+                { "she", 0 },
+                { "sells", 0 },
+                { "shells", 0 },
+                { "sea", 0 },
+                { "shore", 0 }
             };
 
             var prefix = "s";
@@ -325,6 +325,7 @@ namespace LibAlgoCs.Tries.TernaryTrie.Tests
 
         [TestMethod()]
         [TestCategory("IntegrationTest")]
+        [Ignore]
         public void LoadTest()
         {
             Assert.Fail();

@@ -15,12 +15,12 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         #region Node Class
 
-        private sealed class TernaryTrieNode<T>
+        private sealed class TernaryTrieNode<TItem>
         {
             #region Properties
 
-            private T value = default(T);
-            public T Value
+            private TItem value = default(TItem);
+            public TItem Value
             {
                 get
                 {
@@ -43,13 +43,13 @@ namespace LibAlgoCs.Tries.TernaryTrie
             public void ClearNodeValue()
             {
                 IsNodeValueSet = false;
-                value = default(T);
+                value = default(TItem);
             }
             public char Character { get; }
-            public TernaryTrieNode<T> Left { get; set; }
-            public TernaryTrieNode<T> Middle { get; set; }
-            public TernaryTrieNode<T> Right { get; set; }
-            
+            public TernaryTrieNode<TItem> Left { get; set; }
+            public TernaryTrieNode<TItem> Middle { get; set; }
+            public TernaryTrieNode<TItem> Right { get; set; }
+
             #endregion
 
             public TernaryTrieNode(char character)
@@ -62,11 +62,8 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         #region Public Methods
 
-        public void Put(string key, TValue value)
-        {
-            // TODO: balance trie with rotations
-            Root = Put(Root, key, value, 0);
-        }
+        // TODO: balance trie with rotations
+        public void Put(string key, TValue value) => Root = Put(Root, key, value, 0);
 
         public TValue Get(string key)
         {
@@ -90,7 +87,15 @@ namespace LibAlgoCs.Tries.TernaryTrie
 
         public bool Contains(string key)
         {
-            return Get(key) != null;
+            try
+            {
+                Get(key);
+                return true;
+            }
+            catch (KeyNotFoundException)
+            {
+                return false;
+            }
         }
 
         public void Clear()
@@ -99,15 +104,9 @@ namespace LibAlgoCs.Tries.TernaryTrie
             Size = 0;
         }
 
-        public bool IsEmpty()
-        {
-            return Root == null;
-        }
+        public bool IsEmpty() => Root == null;
 
-        public int GetSize()
-        {
-            return Size;
-        }
+        public int GetSize() => Size;
 
         public IEnumerable<string> GetAllKeys()
         {
